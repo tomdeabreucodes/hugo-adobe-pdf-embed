@@ -42,26 +42,24 @@ Manually determine the height of the `div` container. Default auto
     ```toml
     theme = ["hugo-adobe-pdf-embed", "main-theme"]
     ```
-3. Configure your Adobe Embed API credentials in `hugo-adobe-pdf-embed`'s config file
+3. Configure your Adobe Embed API credentials in `hugo-adobe-pdf-embed`'s config file.
 
     The Adobe PDF Embed API provides unlimited free access, however you do still need to [create a an api key](https://acrobatservices.adobe.com/dc-integration-creation-app-cdn/main.html?api=pdf-embed-api).
 
     Tip: for local testing you can create a separate credential with `localhost` as the domain.
-    Once you have your client ID, it will need to be added to your site parameters.
-
-    *./themes/hugo-adobe-pdf-embed/config.toml*
-    ```toml
-    [params]
-        adobeClientId = <Add your API key here>
-    ```
+    Once you have your client ID, it will need to be added to your site parameters. This can either be done directly in `./themes/hugo-adobe-pdf-embed/config.toml` or you might prefer to cut and put them in your main `config.toml`
 
 4. Update your theme or sites `layout/partials/head.html` file to load the necessary Adobe script. If you prefer to not update the theme one directly, you can copy your theme's `head.html` to your root's `layout/partials` folder and edit it there, as this will be [prioritised in the lookuip order](https://gohugo.io/templates/partials/#partial-template-lookup-order).
 
     Add the following code between the `<head>` tags:
     ```go
+    <head>
+    ...
     {{ if .HasShortcode "adobepdf" }}
-        {{ partial "adobeloader.html" . }}
+    <script src="https://acrobatservices.adobe.com/view-sdk/viewer.js"></script>
     {{ end }}
+    ...
+    </head>
     ``` 
 
     The condition means that it will not be loaded unless the shortcode is present.
