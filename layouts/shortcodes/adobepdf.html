@@ -1,9 +1,11 @@
 {{- $url := .Get "url" | default (.Get 0) -}}
 {{- $name := .Get "name" | default ($url) -}}
-{{- $embedMode := .Get "embedMode" | default ("IN_LINE") -}}
+{{- $embedMode := .Get "embedMode" | default ("FULL_WINDOW") -}}
+{{- $width := .Get "width" | default ("100%") -}}
+{{- $height := .Get "height" | default ("auto") -}}
 {{- $id := printf "pdf-%04d" $.Ordinal }}
 
-<div id="{{ $id }}"></div>
+<div id="{{ $id }}" style="width: {{ $width }}; height: {{ $height }};"></div>
 <script type="text/javascript">
   document.addEventListener("adobe_dc_view_sdk.ready", function(){
     var adobeDCView = new AdobeDC.View({clientId: "{{ site.Params.adobeClientId }}", divId: "{{ $id }}"});

@@ -28,6 +28,11 @@ Specify the embed mode. Options:
 
 If none provided, it will default to `IN_LINE`. View the [Adobe docs](https://developer.adobe.com/document-services/docs/overview/pdf-embed-api/howtos/#embed-modes) for more info.
 
+#### width
+Manually determine the width of the `div` container. Default 100%
+#### height
+Manually determine the height of the `div` container. Default auto
+
 ## Installation
 
 1. Add `hugo-adobe-pdf-embed` as a submodule to be able to get upstream changes later `git submodule add https://github.com/tomdeabreucodes/hugo-adobe-pdf-embed.git themes/hugo-adobe-pdf-embed`
@@ -41,6 +46,7 @@ If none provided, it will default to `IN_LINE`. View the [Adobe docs](https://de
 
     The Adobe PDF Embed API provides unlimited free access, however you do still need to [create a an api key](https://acrobatservices.adobe.com/dc-integration-creation-app-cdn/main.html?api=pdf-embed-api).
 
+    Tip: for local testing you can create a separate credential with `localhost` as the domain.
     Once you have your client ID, it will need to be added to your site parameters.
 
     *./themes/hugo-adobe-pdf-embed/config.toml*
@@ -48,10 +54,21 @@ If none provided, it will default to `IN_LINE`. View the [Adobe docs](https://de
     [params]
         adobeClientId = <Add your API key here>
     ```
-    **NOTE:** Please be mindful that this is a private credential, so if you are publishing this config in a public place, take the necessary precautions to conceal it.
 
-4. On one of your content pages, add the shortcode:
+4. Update your theme or sites `layout/partials/head.html` file to load the necessary Adobe script. If you prefer to not update the theme one directly, you can copy your theme's `head.html` to your root's `layout/partials` folder and edit it there, as this will be [prioritised in the lookuip order](https://gohugo.io/templates/partials/#partial-template-lookup-order).
+
+    Add the following code between the `<head>` tags:
+    ```go
+    {{ if .HasShortcode "adobepdf" }}
+        {{ partial "adobeloader.html" . }}
+    {{ end }}
+    ``` 
+
+    The condition means that it will not be loaded unless the shortcode is present.
+
+5. On one of your content pages, add the shortcode:
     ```go
     {{< adobepdf "https://acrobatservices.adobe.com/view-sdk-demo/PDFs/Bodea%20Brochure.pdf" >}}
     ```
-5. Customise with parameters as needed
+
+6. Customise with parameters as needed
