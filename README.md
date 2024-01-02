@@ -46,7 +46,7 @@ If none provided, it will default to `IN_LINE`. View the [Adobe docs](https://de
     *./themes/hugo-adobe-pdf-embed/config.toml*
     ```toml
     [params]
-    adobeClientId = <Add your API key here>
+        adobeClientId = <Add your API key here>
     ```
     **NOTE:** Please be mindful that this is a private credential, so if you are publishing this config in a public place, take the necessary precautions to conceal it.
 
