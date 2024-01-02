@@ -1,0 +1,17 @@
+name = "Embed PDF files"
+license = "MIT"
+licenselink = "https://github.com/tomdeabreucodes/hugo-adobe-pdf-embed/blob/master/LICENSE"
+description = "Hugo theme component for embedding PDF documents with the official PDF Embed API by Adobe"
+
+
+homepage = "https://github.com/gohugoio/gohugoioTheme"
+
+# TODO
+# demosite = ""
+
+tags = ["component", "pdf", "adobe", "embed", "shortcode"]
+features = ["Embed PDF files"]
+
+[author]
+    name = "Tom DeAbreu"
+    homepage = "https://tomdeabreu.uk"
